@@ -84,69 +84,74 @@
 								</footer>
 							</section>
 
-						<!-- Second Section -->
-							<section id="second" class="main special">
-								<header class="major">
-									<h2>Ipsum consequat</h2>
-									<p>Donec imperdiet consequat consequat. Suspendisse feugiat congue<br />
-									posuere. Nulla massa urna, fermentum eget quam aliquet.</p>
-								</header>
-								<ul class="statistics">
-									<li class="style1">
-										<span class="icon solid fa-code-branch"></span>
-										<strong>5,120</strong> Etiam
-									</li>
-									<li class="style2">
-										<span class="icon fa-folder-open"></span>
-										<strong>8,192</strong> Magna
-									</li>
-									<li class="style3">
-										<span class="icon solid fa-signal"></span>
-										<strong>2,048</strong> Tempus
-									</li>
-									<li class="style4">
-										<span class="icon solid fa-laptop"></span>
-										<strong>4,096</strong> Aliquam
-									</li>
-									<li class="style5">
-										<span class="icon fa-gem"></span>
-										<strong>1,024</strong> Nullam
-									</li>
-								</ul>
-								<p class="content">Nam elementum nisl et mi a commodo porttitor. Morbi sit amet nisl eu arcu faucibus hendrerit vel a risus. Nam a orci mi, elementum ac arcu sit amet, fermentum pellentesque et purus. Integer maximus varius lorem, sed convallis diam accumsan sed. Etiam porttitor placerat sapien, sed eleifend a enim pulvinar faucibus semper quis ut arcu. Ut non nisl a mollis est efficitur vestibulum. Integer eget purus nec nulla mattis et accumsan ut magna libero. Morbi auctor iaculis porttitor. Sed ut magna ac risus et hendrerit scelerisque. Praesent eleifend lacus in lectus aliquam porta. Cras eu ornare dui curabitur lacinia.</p>
-								<footer class="major">
-									<ul class="actions special">
-										<li><a href="generic.html" class="button">Learn More</a></li>
-									</ul>
-								</footer>
-							</section>
+					
+	
+<!-- ...existing code... -->
 
-						<!-- Get Started -->
-							<section id="cta" class="main special">
-								<header class="major">
-									<h2>Congue imperdiet</h2>
-									<p>Donec imperdiet consequat consequat. Suspendisse feugiat congue<br />
-									posuere. Nulla massa urna, fermentum eget quam aliquet.</p>
-								</header>
-								<footer class="major">
-									<ul class="actions special">
-										<li><a href="generic.html" class="button primary">Get Started</a></li>
-										<li><a href="generic.html" class="button">Learn More</a></li>
-									</ul>
-								</footer>
+                        <!-- Get Started -->
+                            <section id="cta" class="main special">
+                                <header class="major">
+                                    <h2>Where to start?</h2>
+                                    <p>First let take a look at what is your Zodiac Sun Sign using your birthday!</p>
+                                </header>
+                                <!-- Enter Birthdate Section -->
+                                <section id="birthdate" class="main special" style="padding: 2em 0;">
+                                    <header class="major">
+                                        <h2>Find Your Zodiac Sun Sign</h2>
+                                        <p>Enter your birthdate below to discover your Zodiac Sun Sign!</p>
+                                    </header>
+                                    <form id="zodiac-form">
+                                        <label for="birthdate-input">Birthdate:</label>
+                                        <input type="date" id="birthdate-input" name="birthdate" required>
+                                        <button type="submit" class="button primary">Find My Sign</button>
+                                    </form>
+                                    <div id="zodiac-result" style="margin-top: 1em; font-weight: bold;"></div>
+                                </section>
+                                <header class="major">
+                                    <h2>Then?</h2>
+                                    <p>Next check out the list of all the Zodiacs!</p>
+                                </header>
+                                <footer class="major">
+                                    <ul class="actions special">
+                                        <li><a href="generic.html" class="button primary">Get Started</a></li>
+                                    </ul>
+                                </footer>
+                            </section>
+
+<!-- ...existing code... -->
+
+            <script>
+                // Zodiac sign calculation
+                document.getElementById('zodiac-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const date = new Date(document.getElementById('birthdate-input').value);
+                    const month = date.getUTCMonth() + 1;
+                    const day = date.getUTCDate();
+                    let sign = '';
+                    if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) sign = 'Aquarius';
+                    else if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) sign = 'Pisces';
+                    else if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) sign = 'Aries';
+                    else if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) sign = 'Taurus';
+                    else if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) sign = 'Gemini';
+                    else if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) sign = 'Cancer';
+                    else if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) sign = 'Leo';
+                    else if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) sign = 'Virgo';
+                    else if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) sign = 'Libra';
+                    else if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) sign = 'Scorpio';
+                    else if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) sign = 'Sagittarius';
+                    else if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) sign = 'Capricorn';
+                    document.getElementById('zodiac-result').textContent = sign ? `Your Zodiac Sun Sign is: ${sign}` : 'Please enter a valid date.';
+                });
+            </script>
+
+<!-- ...existing code... -->
+								
 							</section>
 
 					</div>
 
 				<!-- Footer -->
 					<footer id="footer">
-						<section>
-							<h2>Aliquam sed mauris</h2>
-							<p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p>
-							<ul class="actions">
-								<li><a href="generic.html" class="button">Learn More</a></li>
-							</ul>
-						</section>
 						<section>
 							<h2>Etiam feugiat</h2>
 							<dl class="alt">
