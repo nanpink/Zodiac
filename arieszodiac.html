@@ -5,13 +5,35 @@
 <html>
 
 <head>
-	<title>Aries Zodaic Constellation</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<noscript>
-		<link rel="stylesheet" href="assets/css/noscript.css" />
-	</noscript>
+    <title>Aries Zodaic Constellation</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css" />
+    </noscript>
+
+    <!-- popup styles -->
+    <style>
+        .map-container { position: relative; display: inline-block; }
+        /* shared popup style for both star popups */
+        .star-popup {
+            position: absolute;
+            pointer-events: none;
+            display: none;
+            z-index: 50;
+            white-space: nowrap;
+            transition: opacity .12s ease;
+            opacity: 0;
+            transform: translate(-50%, -110%);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0,0,0,.25);
+            background: #111;
+        }
+        .star-popup.visible { display: block; opacity: 1; }
+        .star-popup img { display: block; max-width: 220px; height: auto; display:block; }
+    </style>
 </head>
 
 <body class="is-preload">
@@ -24,26 +46,48 @@
 			<h1>Aries Zodaic Constellation</h1>
 			<p>The First Sign of the Zodiac.</p>
 		</header>
-
+    <h2>Image Maps</h2>
+    <p>
+      Click on the computer, the phone, or the cup of coffee to go to a new page
+      and read more about the topic:
+    </p>
+    <p id="mousecoordinates">Click on Image to Show Mouse Coordinates</p>
 		<!-- Main -->
 		<div id="main">
 
-    <img
-      src="aries.png"
-      alt="Aries Constellation"
-      usemap="#aries"
-      width="600"
-      height="400"
-    />
-	  <map name="#aries">
-	      <area
+    <div class="map-container">
+      <img
+        id="aries-img"
+        src="aries.png"
+        alt="Aries Constellation"
+        usemap="#aries"
+        width="600"
+        height="400"
+      />
+      <!-- popup element shown on hover -->
+      <div id="star-popup" class="star-popup" aria-hidden="true"></div>
+      <div id="star-popup-2" class="star-popup" aria-hidden="true"></div>
+    </div>
+
+      <map name="aries">
+          <area
+        id="star1"
         shape="circle"
         coords="95,300,20"
         alt="Star 1"
         href="star1.htm"
         title="Star 1"
       />
-	  </map>
+          <area
+        id="star2"
+        shape="circle"
+        coords="180,250,20"
+        alt="Star 2"
+        href="star2.htm"
+        title="Star 2"
+      />
+
+      </map>
 				<h2>The Origin</h2>
 				<p>Historically, Aries has represented a ram since late Babylonian times, though earlier it was known as
 					"The Agrarian Worker" or "The Hired Man" in Babylonian astronomy.
@@ -256,17 +300,47 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
    <script>
-      document.addEventListener("click", function(event) {
-        if (event.target.tagName === "AREA") {
-          event.preventDefault(); // Prevent default navigation for demonstration
-        }
-       // console.log(event.clientX, event.clientY);
-        document.getElementById("mousecoordinates").innerText =
-          "Mouse Coordinates: X=" + event.clientX + ", Y=" + event.clientY;
-      
-      });
+      // attach popups to star areas (star1 & star2)
+      (function(){
+        const img = document.getElementById('aries-img');
+        if (!img) return;
 
-    </script>
+        function attach(areaId, popupId, imageSrc, altText) {
+          const area = document.getElementById(areaId);
+          const popup = document.getElementById(popupId);
+          if (!area || !popup) return;
+
+          // ensure popup contains the image (keeps it out of normal body flow)
+          popup.innerHTML = '<img src="' + imageSrc + '" alt="' + (altText||'') + '">';
+
+          function show() {
+            const coords = (area.getAttribute('coords')||'').split(',').map(Number);
+            if (coords.length < 2) return;
+            const [cx, cy] = coords;
+            const imgRect = img.getBoundingClientRect();
+            const scaleX = imgRect.width / (img.naturalWidth || img.width) || 1;
+            const scaleY = imgRect.height / (img.naturalHeight || img.height) || 1;
+            const containerRect = img.parentElement.getBoundingClientRect();
+            const left = (cx * scaleX) + (imgRect.left - containerRect.left);
+            const top = (cy * scaleY) + (imgRect.top - containerRect.top);
+            popup.style.left = left + 'px';
+            popup.style.top = top + 'px';
+            popup.classList.add('visible');
+            popup.setAttribute('aria-hidden','false');
+          }
+
+          function hide(){ popup.classList.remove('visible'); popup.setAttribute('aria-hidden','true'); }
+
+          area.addEventListener('pointerenter', show);
+          area.addEventListener('pointerleave', hide);
+          window.addEventListener('scroll', hide, true);
+          window.addEventListener('resize', hide);
+        }
+
+        attach('star1','star-popup','images/ariessheep.jpg','Star 1 detail');
+        attach('star2','star-popup-2','images/ariescolors.jpg','Star 2 detail');
+      })();
+   </script>
 </body>
 
 </html>
