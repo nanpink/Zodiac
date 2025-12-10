@@ -67,6 +67,8 @@
       <!-- popup element shown on hover -->
       <div id="star-popup" class="star-popup" aria-hidden="true"></div>
       <div id="star-popup-2" class="star-popup" aria-hidden="true"></div>
+	  <div id="star-popup-3" class="star-popup" aria-hidden="true"></div>
+	  <div id="star-popup-4" class="star-popup" aria-hidden="true"></div>
     </div>
 
       <map name="aries">
@@ -86,7 +88,23 @@
         href="star2.htm"
         title="Star 2"
       />
-
+	  
+	       <area
+        id="star3"
+        shape="circle"
+        coords="220,180,20"
+        alt="Star 3"
+        href="star3.htm"
+        title="Star 3"
+      />
+	         <area
+        id="star4"
+        shape="circle"
+        coords="440,220,20"
+        alt="Star 4"
+        href="star4.htm"
+        title="Star 4"
+      />
       </map>
 				<h2>The Origin</h2>
 				<p>Historically, Aries has represented a ram since late Babylonian times, though earlier it was known as
@@ -300,7 +318,7 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
    <script>
-      // attach popups to star areas (star1 & star2)
+      // attach popups to star areas (stars)
       (function(){
         const img = document.getElementById('aries-img');
         if (!img) return;
@@ -339,6 +357,8 @@
 
         attach('star1','star-popup','images/ariessheep.jpg','Star 1 detail');
         attach('star2','star-popup-2','images/ariescolors.jpg','Star 2 detail');
+		attach('star3','star-popup-3','images/diamond.jpg','Star 3 detail');
+		attach('star4','star-popup-4','images/ariesfire.jpg','Star 4 detail');
       })();
    </script>
 </body>
