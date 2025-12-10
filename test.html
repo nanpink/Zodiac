@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <body>
+      <img
+      src="aries.png"
+      alt="Orion the Hunter"
+      usemap="#orion"
+      width="800"
+      height="534"
+    />
+    <h2>Image Maps</h2>
+    <p>
+      Click on the computer, the phone, or the cup of coffee to go to a new page
+      and read more about the topic:
+    </p>
+    <p id="mousecoordinates">Click on Image to Show Mouse Coordinates</p>
+  
+
+    <map name="orion">
+      <!-- <area
+        shape="rect"
+        coords="34,44,270,350"
+        alt="Computer"
+        href="computer.htm"
+        title="I am a computer"
+      /> -->
+      <area
+        shape="circle"
+        coords="140,328,70"
+        alt="Star 1"
+        href="star1.htm"
+        title="Star 1"
+      />
+      <area
+        shape=""
+        coords=""
+        alt="Star 2"
+        href="star2.htm"
+        title="Star 2"
+      />
+    </map>
+
+    <script>
+      document.addEventListener("click", function(event) {
+        if (event.target.tagName === "AREA") {
+          event.preventDefault(); // Prevent default navigation for demonstration
+        }
+       // console.log(event.clientX, event.clientY);
+        document.getElementById("mousecoordinates").innerText =
+          "Mouse Coordinates: X=" + event.clientX + ", Y=" + event.clientY;
+      
+      });
+
+    </script>
+  </body>
+</html>
